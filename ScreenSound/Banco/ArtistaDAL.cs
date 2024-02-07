@@ -11,7 +11,7 @@ internal class ArtistaDAL
         using var connection = new Connection().ObterConexao();
         connection.Open();
 
-        string sql = "SELECT * FROM Artistas;";
+        string sql = "SELECT * FROM Artistas";
         SqlCommand command = new SqlCommand(sql, connection);
         using SqlDataReader dataReader = command.ExecuteReader();
 
@@ -27,8 +27,22 @@ internal class ArtistaDAL
 
             lista.Add(artista);
         }
-
         return lista;
+    }
 
+    public void Adicionar(Artista artista)
+    {
+        using var connection = new Connection().ObterConexao();
+        connection.Open();
+
+        string sql = "INSERT INTO Artistas (Nome, FotoPerfil, Bio) VALUES (@nome, @perfilPadrao, @bio)";
+        SqlCommand command = new SqlCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@nome", artista.Nome);
+        command.Parameters.AddWithValue("@perfilPadrao", artista.FotoPerfil);
+        command.Parameters.AddWithValue("@bio", artista.Bio);
+
+        int retorno = command.ExecuteNonQuery();
+        Console.WriteLine($"Linhas afetadas: {retorno}");
     }
 }
