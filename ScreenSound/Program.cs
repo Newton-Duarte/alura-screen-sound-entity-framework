@@ -1,41 +1,8 @@
 ﻿using ScreenSound.Banco;
 using ScreenSound.Menus;
-using ScreenSound.Modelos;
 
-try
-{
-    var screenSoundContext = new ScreenSoundContext();
-    var artistaDAL = new ArtistaDAL(screenSoundContext);
-
-    //artistaDAL.Adicionar(new Artista("Bruce Dickinson", "Paul Bruce Dickinson (born 7 August 1958) is an English singer, best known as the lead vocalist of the heavy metal band Iron Maiden."));
-    //artistaDAL.Atualizar(new Artista("Michel Teló Da Silva", "Bio atualizada")
-    //{
-    //    Id = 3,
-    //});
-    //artistaDAL.Deletar(new Artista("Bruce Dickinson", "")
-    //{
-    //    Id = 2002,
-    //});
-    var lista = artistaDAL.Listar();
-
-    foreach (var item in lista)
-    {
-        Console.WriteLine(item);
-    }
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
-
-return;
-
-Artista ira = new Artista("Ira!", "Banda Ira!");
-Artista beatles = new("The Beatles", "Banda The Beatles");
-
-Dictionary<string, Artista> artistasRegistrados = new();
-artistasRegistrados.Add(ira.Nome, ira);
-artistasRegistrados.Add(beatles.Nome, beatles);
+var context = new ScreenSoundContext();
+var artistaDAL = new ArtistaDAL(context);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());
@@ -74,7 +41,7 @@ void ExibirOpcoesDoMenu()
     if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
     {
         Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
-        menuASerExibido.Executar(artistasRegistrados);
+        menuASerExibido.Executar(artistaDAL);
         if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
     }
     else

@@ -18,6 +18,11 @@ internal class ArtistaDAL
         return context.Artistas.ToList();
     }
 
+    public Artista? RecuperarPeloNome(string nome)
+    {
+        return context.Artistas.First((artista) => artista.Nome.Equals(nome));
+    }
+
     public void Adicionar(Artista artista)
     {
         context.Artistas.Add(artista);
