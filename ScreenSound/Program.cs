@@ -4,16 +4,18 @@ using ScreenSound.Modelos;
 
 try
 {
-    var artistaDAL = new ArtistaDAL();
-    //artistaDAL.Adicionar(new Artista("Michel Teló", "Michel Teló (Medianeira, 21 de janeiro de 1981) é um cantor e compositor brasileiro de música sertaneja.")
-    //{
-    //    FotoPerfil = "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?q=80&w=1985&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    //});
+    var screenSoundContext = new ScreenSoundContext();
+    var artistaDAL = new ArtistaDAL(screenSoundContext);
+
+    //artistaDAL.Adicionar(new Artista("Bruce Dickinson", "Paul Bruce Dickinson (born 7 August 1958) is an English singer, best known as the lead vocalist of the heavy metal band Iron Maiden."));
     //artistaDAL.Atualizar(new Artista("Michel Teló Da Silva", "Bio atualizada")
     //{
     //    Id = 3,
     //});
-    artistaDAL.Deletar(3);
+    //artistaDAL.Deletar(new Artista("Bruce Dickinson", "")
+    //{
+    //    Id = 2002,
+    //});
     var lista = artistaDAL.Listar();
 
     foreach (var item in lista)
